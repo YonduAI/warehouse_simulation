@@ -178,3 +178,9 @@ docs/build/doctrees/
 
 # Ignore Isaac Sim cache files
 isaac_cache
+
+# Ignore git attributes
+.gitattributes
+
+# Ignore Streaming Client
+webrtc_client.AppImage
