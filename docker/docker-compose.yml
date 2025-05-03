@@ -1,0 +1,45 @@
+services:
+    yondu_isaac:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      image: yondu/isaac:latest
+      container_name: yondu_isaac
+      runtime: nvidia
+      network_mode: "host"
+      entrypoint: ["/home/workspaces/docker/entrypoint.sh"]
+      environment:
+        - ACCEPT_EULA=Y
+        - QT_X11_NO_MITSHM=1
+        - DISPLAY=$DISPLAY
+        - XDG_RUNTIME_DIR=/tmp/runtime-yondu
+        - ROS_DISTRO=humble
+        - ROS_DOMAIN_ID=0
+        - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+        - FASTRTPS_DEFAULT_PROFILES_FILE=/home/workspaces/ros2_ws/fastdds.xml
+      volumes:
+        - ~/.Xauthority:/root/.Xauthority 
+        - $PWD/isaac_cache/isaac-sim/cache/ov:/root/.cache/ov:rw
+        - $PWD/isaac_cache/isaac-sim/cache/pip:/root/.cache/pip:rw
+        - $PWD/isaac_cache/isaac-sim/cache/glcache:/root/.cache/nvidia/GLCache:rw
+        - $PWD/isaac_cache/isaac-sim/cache/computecache:/root/.nv/ComputeCache:rw
+        - $PWD/isaac_cache/isaac-sim/cache/asset_browser:/isaac-sim/exts/isaacsim.asset.browser/cache:rw 
+        - $PWD/isaac_cache/isaac-sim/logs:/root/.nvidia-omniverse/logs:rw
+        - $PWD/isaac_cache/isaac-sim/data:/root/.local/share/ov/data:rw
+        - $PWD/isaac_cache/isaac-sim/pkg:/root/.local/share/ov/pkg:rw
+        - $PWD/isaac_cache/isaac-sim/documents:/root/Documents:rw
+        - $PWD:/home/workspaces:rw
+      stdin_open: true
+      tty: true
+      restart: "no"
+      ipc: "host"
+      shm_size: 2gb
+      deploy:
+        resources:
+          reservations:
+              devices:
+                - driver: nvidia
+                  count: all
+                  capabilities: [gpu]
+
+

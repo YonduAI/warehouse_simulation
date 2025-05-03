@@ -1,0 +1,61 @@
+#!/bin/bash
+
+ISAACSIM_CONTAINER_NAME="yondu_isaac"
+ISAACSIM_DOCKER_COMPOSE_FILE_PATH="./docker/docker-compose.yml"
+
+# For CycloneDDS
+#sudo sysctl -w net.ipv4.ipfrag_time=3
+#sudo sysctl -w net.ipv4.ipfrag_high_thresh=134217728
+#sudo sysctl -w net.core.rmem_max=2147483647
+
+echo "################################################################"
+echo "################################################################"
+echo "###  Please enter your input[1-2]:                           ###"
+echo "###  1. Press 1 to [RUN] Yondu Isaac Sim Container           ###"
+echo "###  2. Press 2 to [BUILD] Yondu Isaac Sim Image             ###"
+echo "###  Press any other key to exit ...                         ###"
+echo "################################################################"
+echo "################################################################"
+read -p "Enter Your Input: "  input
+
+if [ $input == "1" ];
+    then
+    
+    docker compose -f "$ISAACSIM_DOCKER_COMPOSE_FILE_PATH" up -d 
+
+    # Check if the container started successfully
+    if [ $? -eq 0 ]; 
+        then
+        echo "Container of image yondu/isaac:latest started successfully."
+    else
+        echo "Error: Failure to start yondu_isaac container." >&2
+        exit 1
+    fi
+
+    # Attach to isaacflow_sim container
+    docker exec -it "$ISAACSIM_CONTAINER_NAME" tmux attach -t simulator
+
+    # Kill Isaac Sim related processes on shutdown
+    docker exec -it "$ISAACSIM_CONTAINER_NAME" bash -c "pkill omniverse-kit"
+
+    # Clean isaacflow_sim container
+    docker stop "$ISAACSIM_CONTAINER_NAME"
+    docker rm "$ISAACSIM_CONTAINER_NAME"
+
+        
+elif [ $input == "2" ];
+    then
+    export ISAAC_SIM_TAG=4.5.0
+    echo "Using Isaac Sim 4.5.0 to build yondu/isaac:latest image ..."
+
+    # Create docker image
+    docker compose -f "$ISAACSIM_DOCKER_COMPOSE_FILE_PATH" build --build-arg ISAAC_SIM_TAG=$ISAAC_SIM_TAG 
+
+else
+    echo "[ERROR] Entered choise is not correct ! Choice entered: $input"
+    exit
+
+fi
+
+
+echo "DONE"
