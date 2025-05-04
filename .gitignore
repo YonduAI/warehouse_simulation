@@ -184,3 +184,6 @@ isaac_cache
 
 # Ignore Streaming Client
 webrtc_client.AppImage
+
+# Ignore assets
+assets
