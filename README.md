@@ -33,12 +33,15 @@ This repository provides Isaac Sim setup for simulating deformables in warehouse
   git clone git@github.com:YonduAI/warehouse_simulation.git
   ```
 
-- Create docker image **yondu/isaac:latest** using startScript:
+- Build docker image **yondu/isaac:latest** using startScript:
 
   ```
   chmod +x startScript
   ./startScript # Press 2
   ```
+
+- Download assets from [Google Drive](https://drive.google.com/file/d/10dZBzDpWH1Y0pvJPYA_twuHlK5Bfxsrn/view?usp=sharing) and extract in repository's root directory:
+
 
 ---
 
