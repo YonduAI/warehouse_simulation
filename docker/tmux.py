@@ -18,7 +18,7 @@ class Simulator:
         pane = self.simulator.list_panes()[0]
         self.paneDict['simulator'] = pane
         #pane.send_keys(cmd='isaac ./scripts/run_sim.py', enter=True)
-        pane.send_keys(cmd='/isaac-sim/runheadless.sh', enter=True)
+        pane.send_keys(cmd='/isaac-sim/python.sh scripts/run.py --usd_path /home/workspaces/assets/scenario.usd', enter=True)
         time.sleep(1)
         roslog = pane.capture_pane()
         print(roslog)

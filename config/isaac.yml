@@ -1,0 +1,10 @@
+isaac_sim:
+  live_stream_config:
+    width: 1280
+    height: 720
+    window_width: 1920
+    window_height: 1080
+    renderer: "RayTracedLighting"
+    display_options: 3286
+    headless: True
+    hide_ui: False
