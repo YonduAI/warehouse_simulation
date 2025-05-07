@@ -2,6 +2,8 @@
 
 This repository provides Isaac Sim setup for simulating deformables in warehouse environment setup.
 
+![](./preview/deformables.mp4)
+
 ---
 
 ## Table of Content
@@ -50,5 +52,5 @@ This repository provides Isaac Sim setup for simulating deformables in warehouse
 
 - Launch WebRTC Streaming Client:
   ```
-  ./<webrtc_streaming_client.AppImgae>
+  ./<webrtc_streaming_client.AppImage>
   ```
