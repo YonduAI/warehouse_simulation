@@ -2,7 +2,7 @@
 
 This repository provides Isaac Sim setup for simulating deformables in warehouse environment setup.
 
-![](./preview/deformables.mp4)
+![](./preview/deformables.gif)
 
 ---
 
