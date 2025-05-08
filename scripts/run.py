@@ -17,9 +17,6 @@ def read_config(file_path):
 
 def load_extension():
     from isaacsim.core.utils.extensions import enable_extension
-    from isaacsim.core.utils.viewports import destroy_all_viewports
-
-    destroy_all_viewports(destroy_main_viewport=False)
 
     # Enable Necessary extensions
     enable_extension("isaacsim.ros2.bridge")
@@ -44,6 +41,7 @@ def is_valid_usd(file_path):
 
 def load_usd(usd_path):
     import carb
+    import omni
     from isaacsim.core.utils.prims import create_prim
     from isaacsim.core.utils.stage import is_stage_loading, add_reference_to_stage
 
@@ -53,9 +51,7 @@ def load_usd(usd_path):
     else:
         carb.log_error("Environment usd file path not found.")
 
-    # Create the warehouse prim and load the environment
-    prim_path = "/World/warehouse"
-    add_reference_to_stage(usd_path=usd_path, prim_path=prim_path)
+    omni.usd.get_context().open_stage(usd_path) 
 
     # Update the simulation to ensure the environment is loaded
     kit.update()
