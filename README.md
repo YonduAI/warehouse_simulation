@@ -40,7 +40,7 @@ This repository provides Isaac Sim setup for simulating deformables in warehouse
   ./startScript # Press 2
   ```
 
-- Download assets from [Google Drive](https://drive.google.com/file/d/1C9vrPtSvvcYB78hXWDC1B_5p4nX8gl5u/view?usp=sharing) and extract in repository's root directory.
+- Download assets from [Google Drive](https://drive.google.com/file/d/1J4gHQAYH-2HS4e8E95znHOTodI4bQI_a/view?usp=sharing) and extract in repository's root directory.
 
 
 ---
